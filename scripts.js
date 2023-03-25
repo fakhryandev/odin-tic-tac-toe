@@ -14,11 +14,17 @@ for (let index = 0; index < boxes.length; index++) {
   element.addEventListener("click", markBox);
 }
 
+let playerName = document.querySelector(".player-name");
+
 function markBox(e) {
   const click = e.target;
-  activePlayer == 0
-    ? (click.innerHTML += '<span class="o-mark">O</span>')
-    : (click.innerHTML += '<span class="x-mark">X</span>');
+  if (activePlayer == 0) {
+    click.innerHTML += '<span class="o-mark">O</span>';
+    playerName.textContent = "Player 2";
+  } else {
+    click.innerHTML += '<span class="x-mark">X</span>';
+    playerName.textContent = "Player 1";
+  }
   nextPlayer();
 }
 

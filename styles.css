@@ -1,12 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.title {
+  font-size: 6em;
+  font-weight: 700;
+  color: #00235b;
+}
+
+.subtext {
+  word-spacing: 3px;
+}
+
+.player-name {
+  font-weight: bold;
+}
+
 .border {
-  border-width: 2px !important;
+  border-width: 3px !important;
 }
 
 .box {
   transition: 0.5s;
-  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 3.5em;
   height: 184px;

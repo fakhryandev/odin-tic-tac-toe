@@ -1,7 +1,20 @@
-let activePlayer = 0;
+const winPattern = [
+  [0, 1, 2],
+  [0, 3, 6],
+  [3, 4, 5],
+  [6, 7, 8],
+  [1, 4, 7],
+  [2, 4, 6],
+  [2, 5, 8],
+  [0, 4, 8],
+];
 
-const playerOne = newPlayer("player one", "x");
-const playerTwo = newPlayer("player two", "o");
+let remainingSpots = 9;
+
+const playerOne = newPlayer("Player 1", "X");
+const playerTwo = newPlayer("Player 2", "O");
+
+let activePlayer = playerOne;
 
 function newPlayer(name, marker) {
   return { name, marker };
@@ -11,23 +24,29 @@ let boxes = document.getElementsByClassName("box");
 
 for (let index = 0; index < boxes.length; index++) {
   const element = boxes[index];
-  element.addEventListener("click", markBox);
+  element.addEventListener("click", boxEvent);
 }
 
-let playerName = document.querySelector(".player-name");
+const playerNameDisplay = document.querySelector(".player-name");
+
+function boxEvent(e) {
+  if (!e.target.children.length) {
+    markBox(e);
+
+    nextPlayer();
+    playerNameDisplay.textContent = `${activePlayer.name}`;
+  }
+}
 
 function markBox(e) {
   const click = e.target;
-  if (activePlayer == 0) {
-    click.innerHTML += '<span class="o-mark">O</span>';
-    playerName.textContent = "Player 2";
-  } else {
-    click.innerHTML += '<span class="x-mark">X</span>';
-    playerName.textContent = "Player 1";
-  }
-  nextPlayer();
+  const markerClass = `${activePlayer.marker.toLowerCase()}-mark`;
+  click.innerHTML += `<span class=${markerClass}>${activePlayer.marker}</span>`;
+  click.style.cursor = "default";
 }
 
 function nextPlayer() {
-  activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+  activePlayer === playerOne
+    ? (activePlayer = playerTwo)
+    : (activePlayer = playerOne);
 }

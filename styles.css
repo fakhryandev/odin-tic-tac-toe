@@ -11,6 +11,8 @@ body {
 }
 
 .subtext {
+  font-size: 1.6rem;
+  color: rgb(56, 57, 63);
   word-spacing: 3px;
 }
 
@@ -27,6 +29,7 @@ body {
   font-weight: 500;
   font-size: 3.5em;
   height: 184px;
+  cursor: pointer;
 }
 
 .box:hover {
@@ -35,8 +38,10 @@ body {
 
 .o-mark {
   color: #dc0000;
+  pointer-events: none;
 }
 
 .x-mark {
   color: #34b3f1;
+  pointer-events: none;
 }

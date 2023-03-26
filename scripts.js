@@ -9,6 +9,8 @@ const winPattern = [
   [0, 4, 8],
 ];
 
+const playerBoard = new Array(9);
+
 let remainingSpots = 9;
 
 const playerOne = newPlayer("Player 1", "X");
@@ -24,21 +26,25 @@ let boxes = document.getElementsByClassName("box");
 
 for (let index = 0; index < boxes.length; index++) {
   const element = boxes[index];
-  element.addEventListener("click", boxEvent);
+  element.addEventListener("click", function (e) {
+    boxEvent(e, index);
+  });
 }
 
 const playerNameDisplay = document.querySelector(".player-name");
 
-function boxEvent(e) {
+function boxEvent(e, index) {
   if (!e.target.children.length) {
     markBox(e);
 
-    nextPlayer();
-    playerNameDisplay.textContent = `${activePlayer.name}`;
+    playerBoard[index] = activePlayer.marker;
 
+    checkWinner();
     remainingSpots -= 1;
-
-    if (!remainingSpots) {
+    if (remainingSpots > 0) {
+      nextPlayer();
+      playerNameDisplay.textContent = `${activePlayer.name}`;
+    } else {
       declareTie();
     }
   }
@@ -55,6 +61,18 @@ function nextPlayer() {
   activePlayer === playerOne
     ? (activePlayer = playerTwo)
     : (activePlayer = playerOne);
+}
+
+function checkWinner() {
+  winPattern.forEach((item, index) => {
+    if (
+      playerBoard[item[0]] === activePlayer.marker &&
+      playerBoard[item[1]] === activePlayer.marker &&
+      playerBoard[item[2]] === activePlayer.marker
+    ) {
+      console.log("winner");
+    }
+  });
 }
 
 function declareTie() {

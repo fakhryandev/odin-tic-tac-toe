@@ -35,6 +35,12 @@ function boxEvent(e) {
 
     nextPlayer();
     playerNameDisplay.textContent = `${activePlayer.name}`;
+
+    remainingSpots -= 1;
+
+    if (!remainingSpots) {
+      declareTie();
+    }
   }
 }
 
@@ -49,4 +55,8 @@ function nextPlayer() {
   activePlayer === playerOne
     ? (activePlayer = playerTwo)
     : (activePlayer = playerOne);
+}
+
+function declareTie() {
+  console.log("It's a tie");
 }
